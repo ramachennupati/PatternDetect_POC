@@ -10,3 +10,4 @@ uvicorn[standard]
 python-multipart
 httpx
 playwright
+pytest
