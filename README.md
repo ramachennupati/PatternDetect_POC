@@ -137,6 +137,25 @@ Notes:
 - The API has CORS enabled (`*`) to allow the demo to call it from the browser. For production, restrict origins.
 - Use `/detect` endpoint for JSON + base64 annotated image, or `/detect/image` to receive raw JPEG bytes.
 
+Demo tests (optional)
+
+A Playwright-based end-to-end test is included at `tests/test_demo_e2e.py`. It launches a local API and a static file server, opens the demo in a headless Chromium instance, uploads `data/sample1.jpg`, and asserts that an annotated image appears.
+
+To run the test locally:
+
+1. Install the Python package and Playwright browsers:
+```powershell
+pip install -r requirements.txt
+python -m playwright install chromium
+```
+
+2. Run the E2E test:
+```powershell
+pytest tests/test_demo_e2e.py -q
+```
+
+If Playwright or the browser binaries are not installed the test will be skipped (it requires `playwright` and a browser installed via `playwright install`).
+
 ---
 
 ## Release & Docker image
