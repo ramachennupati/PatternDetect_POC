@@ -73,3 +73,22 @@ Notes:
 ## Notes
 - `ultralytics` will download a pre-trained `yolov8n` model the first time it runs.
 - For production or edge deployment, replace with optimized builds (ONNX/TensorRT/OpenVINO) and use a curated dataset.
+
+## Release & Docker image
+This repository includes a workflow that builds and publishes a Docker image when you push a semantic tag (for example `v0.1.0`). The workflow is located at `.github/workflows/release-and-docker.yml` and will:
+
+- Build the Docker image with Buildx
+- Push the image to Docker Hub at `docker.io/<DOCKERHUB_USERNAME>/patterndetect_poc:<tag>` and also tag `latest`
+- Create a GitHub Release for the tag
+
+Before pushing a tag, add the following repository secrets (Settings → Secrets → Actions):
+- `DOCKERHUB_USERNAME`: your Docker Hub username
+- `DOCKERHUB_TOKEN`: a Docker Hub access token (or password)
+
+To create a release and trigger the workflow:
+```bash
+# create and push a tag
+git tag v0.1.0
+git push origin v0.1.0
+```
+
