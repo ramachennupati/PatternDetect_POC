@@ -48,5 +48,6 @@ jobs:
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           body: ${{ github.event.head_commit.message }}
+          files: POC_Guide.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
