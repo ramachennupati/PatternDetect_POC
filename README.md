@@ -114,6 +114,31 @@ with PatternDetectClient("http://localhost:8000") as client:
 
 ---
 
+## Browser demo (static HTML)
+
+A very small static demo is included in the `demo/` folder. It provides a simple HTML + JavaScript UI that uploads an image to the API and shows the JSON results and annotated image.
+
+How to run the demo:
+
+1. Start the API server:
+```powershell
+. .\.venv\Scripts\Activate.ps1
+uvicorn src.api:app --host 0.0.0.0 --port 8000
+```
+
+2. Serve the `demo/` folder from a simple static server (so the browser can fetch resources):
+```powershell
+# from repo root
+python -m http.server 8080 --directory demo
+# then open http://localhost:8080 in your browser
+```
+
+Notes:
+- The API has CORS enabled (`*`) to allow the demo to call it from the browser. For production, restrict origins.
+- Use `/detect` endpoint for JSON + base64 annotated image, or `/detect/image` to receive raw JPEG bytes.
+
+---
+
 ## Release & Docker image
 This repository includes a workflow that builds and publishes a Docker image when you push a semantic tag (for example `v0.1.0`). The workflow is located at `.github/workflows/release-and-docker.yml` and will:
 
