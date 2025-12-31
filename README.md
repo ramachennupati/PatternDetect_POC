@@ -74,6 +74,46 @@ Notes:
 - `ultralytics` will download a pre-trained `yolov8n` model the first time it runs.
 - For production or edge deployment, replace with optimized builds (ONNX/TensorRT/OpenVINO) and use a curated dataset.
 
+## REST API client & interface 🔌
+
+This repository includes a **Python client wrapper** and a small **Streamlit interface** that calls the REST API.
+
+Files added:
+
+- `src/api_client.py` — `PatternDetectClient` (sync client using `httpx`) with convenience methods:
+  - `health()`
+  - `detect(...)` (returns JSON, includes base64 annotated image when requested)
+  - `detect_and_save_annotated(out_path, ...)`
+  - `detect_image_bytes(...)` (returns raw JPEG bytes from `/detect/image`)
+
+- `src/api_interface.py` — a Streamlit app that calls the API and displays JSON and annotated images.
+
+Quick instructions
+
+1. Start the API server (example):
+```powershell
+# from project root
+. .\.venv\Scripts\Activate.ps1
+uvicorn src.api:app --host 0.0.0.0 --port 8000
+```
+
+2. Run the Streamlit interface (defaults to `http://localhost:8000`):
+```powershell
+streamlit run src/api_interface.py
+```
+
+3. Or use the client from a script:
+```python
+from src.api_client import PatternDetectClient
+
+with PatternDetectClient("http://localhost:8000") as client:
+    print(client.health())
+    res = client.detect(file_path="data/sample1.jpg", conf=0.25, annotated=True)
+    client.detect_and_save_annotated("outputs/api_annotated.jpg", file_path="data/sample1.jpg", conf=0.25)
+```
+
+---
+
 ## Release & Docker image
 This repository includes a workflow that builds and publishes a Docker image when you push a semantic tag (for example `v0.1.0`). The workflow is located at `.github/workflows/release-and-docker.yml` and will:
 
