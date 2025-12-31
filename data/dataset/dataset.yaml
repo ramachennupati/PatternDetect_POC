@@ -1,0 +1,4 @@
+train: C:/Users/kisho/OneDrive/Desktop/truck-inspection-poc/data/dataset/images/train
+val: C:/Users/kisho/OneDrive/Desktop/truck-inspection-poc/data/dataset/images/val
+nc: 1
+names: ['object']

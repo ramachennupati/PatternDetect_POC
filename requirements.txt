@@ -1,0 +1,11 @@
+ultralytics
+opencv-python
+pillow
+numpy
+matplotlib
+tqdm
+streamlit
+fastapi
+uvicorn[standard]
+python-multipart
+httpx
