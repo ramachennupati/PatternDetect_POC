@@ -137,6 +137,17 @@ Notes:
 - The API has CORS enabled (`*`) to allow the demo to call it from the browser. For production, restrict origins.
 - Use `/detect` endpoint for JSON + base64 annotated image, or `/detect/image` to receive raw JPEG bytes.
 
+Generating sample images for tests
+
+A helper script is included to create synthetic sample images and a template for local testing. By default it writes files to `data/samples`.
+
+```powershell
+# from repo root
+python scripts/generate_samples.py --out data/samples --count 3
+```
+
+The test/demo uses `data/sample1.jpg` if present; running the script ensures additional samples are available under `data/samples/`.
+
 Demo tests (optional)
 
 A Playwright-based end-to-end test is included at `tests/test_demo_e2e.py`. It launches a local API and a static file server, opens the demo in a headless Chromium instance, uploads `data/sample1.jpg`, and asserts that an annotated image appears.
