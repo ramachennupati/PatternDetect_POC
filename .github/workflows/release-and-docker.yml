@@ -32,6 +32,11 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/patterndetect_poc:${{ github.ref_name }}
             ${{ secrets.DOCKERHUB_USERNAME }}/patterndetect_poc:latest
 
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
       - name: Create GitHub release
         uses: softprops/action-gh-release@v1
         with:
