@@ -155,7 +155,9 @@ pytest tests/test_demo_e2e.py -q
 ```
 
 If Playwright or the browser binaries are not installed the test will be skipped (it requires `playwright` and a browser installed via `playwright install`).
+CI note
 
+- The repository includes a GitHub Actions workflow (`.github/workflows/e2e-demo.yml`) that runs the Playwright E2E test on **push** and **pull request** events targeting the `main` branch. This verifies that the demo + API remain functional on changes.
 ---
 
 ## Release & Docker image
